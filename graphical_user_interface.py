@@ -64,7 +64,6 @@ class StartPage(tk.Frame):
         button1.grid(pady=5, padx=20, row=5)
 
 class PageOne(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page One", font=LARGE_FONT)
