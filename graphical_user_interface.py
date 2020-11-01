@@ -73,7 +73,7 @@ class PageOne(tk.Frame):
         button1 = tk.Button(self, text="Enter Coordinates", command=lambda: controller.show_frame(Coordinates))
         button1.grid(pady=5, padx=10, row=1)
 
-        button2 = tk.Button(self, text="sample", command=main.check_for_flood())
+        button2 = tk.Button(self, text="Check", command=lambda: main.check_for_flood())
         button2.grid(pady=5, padx=10, row=2)
 
 class Coordinates(tk.Frame):

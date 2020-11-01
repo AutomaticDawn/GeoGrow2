@@ -46,7 +46,8 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
     # save_alert_level(alert_level_counter)
     # Ovo odkomentarisati kada budemo imali api
 
-    return alert_level_counter
+    print(switcher_func(alert_level_counter))
+    #return alert_level_counter
 
 
 class CoordinatesManager:
@@ -80,15 +81,16 @@ def get_saved_alert_level():  # Cita prethodni alert level iz text fajla
     return previous_alert_level
 
 
+def get_current_time():
+    t = time.localtime()
+    current_time = time.strftime("%H:%M:%S", t)
+    print(current_time)
+
+
 # START
-t = time.localtime()
-current_time = time.strftime("%H:%M:%S", t)
-print(current_time)
-if current_time == "15:00:00":
-    alert_level = check_for_flood()
-    print(switcher_func(alert_level))
 
 save_alert_level(0)  # Ovo naravno skloniti kada api proradi
 
+# alert_level = check_for_flood()
 # CoordinatesManager.save_new_coordinates(None, 19.353790283203125, 44.19469759091441, 19.378938674926758, 44.17654094649196)
 # print(get_current_coordinates())
