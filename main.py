@@ -4,7 +4,7 @@ import riverDetect
 import pixelCounter
 
 
-def switcher_func(arg):
+def switcher_func(arg):  # Switch funkcija za check_for_flood()
     switcher = {
         -1: "Possible drought",
         0: "Everything is chill",
@@ -16,7 +16,11 @@ def switcher_func(arg):
     return msg
 
 
-def check_for_flood():
+def display_message_to_user(message):  # Ovde cemo ubaciti stvari koje ce da funkcionisu sa GUI-em
+    print(message)
+
+
+def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za poplavom
     river_before = riverDetect.DetectRivers.find_rivermask(None, "beforeflood.png")
     river_after = riverDetect.DetectRivers.find_rivermask(None, "afterflood.png")
 
@@ -38,6 +42,6 @@ def check_for_flood():
     return alert_level_counter
 
 
+# Ovde krece program
 alert_level = check_for_flood()
 print(switcher_func(alert_level))
-
