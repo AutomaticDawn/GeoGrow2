@@ -101,7 +101,7 @@ class Coordinates(tk.Frame):
         eE.grid(row=3, column=1)
         eW.grid(row=4, column=1)
 
-        submitBTN = Button(self, text="Submit")
+        submitBTN = Button(self, text="Submit", command=lambda: main.CoordinatesManager.save_new_coordinates(None, eW.get(), eN.get(), eE.get(), eS.get()))
         exitBTN = Button(self, text="Exit", command=lambda: controller.show_frame(PageOne))
         submitBTN.grid(row=5)
         exitBTN.grid(row=5, column=1)
