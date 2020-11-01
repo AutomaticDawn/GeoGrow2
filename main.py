@@ -53,6 +53,7 @@ class CoordinatesManager:
         if x_upper_left != "" or y_upper_left != "" or x_lower_right != "" or y_lower_right != "":
             coordinates = str(x_upper_left) + " " + str(y_upper_left) + " " + str(x_lower_right) + " " + str(y_lower_right)
             f.write(coordinates)
+            graphical_user_interface.Coordinates.updateErrorText(None, "Coordinates saved       ")
         else:
             graphical_user_interface.Coordinates.updateErrorText(None, "Error: Not all fields filled")
         f.close()
