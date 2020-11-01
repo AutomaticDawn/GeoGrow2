@@ -18,13 +18,16 @@ class Main(tk.Tk):
         self.frames = {}
 
         frame = StartPage(container, self)
-        frame_ = PageOne(container, self)
+        frame1 = PageOne(container, self)
+        frame2 = Coordinates(container, self)
 
         self.frames[StartPage] = frame
-        self.frames[PageOne] = frame_
+        self.frames[PageOne] = frame1
+        self.frames[Coordinates] = frame2
 
         frame.grid(row=0, column=0, sticky="nsew")
-        frame_.grid(row=0, column=0, sticky="nsew")
+        frame1.grid(row=0, column=0, sticky="nsew")
+        frame2.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(StartPage)
 
@@ -51,7 +54,7 @@ class StartPage(tk.Frame):
         passwLabel = tk.Label(self, text="Password:")
         passwLabel.grid(row=2)
 
-        passw = tk.Entry(self, show="*", width ="24")
+        passw = tk.Entry(self, show="*", width="24")
         passw.grid(padx=20, row=3)
 
         button1 = tk.Button(self, text="Login", command=lambda: controller.show_frame(PageOne))
@@ -64,8 +67,38 @@ class PageOne(tk.Frame):
         label = tk.Label(self, text="Page One", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
 
-        button1 = tk.Button(self, text="Start Page",command=lambda: controller.show_frame(StartPage))
+        button1 = tk.Button(self, text="Enter Coordinates", command=lambda: controller.show_frame(Coordinates))
         button1.pack()
+
+class Coordinates(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Insert Coordinates", font=LARGE_FONT)
+        label.grid(row=0, columnspan=2)
+        labelN = tk.Label(self, text="N:")
+        labelS = tk.Label(self, text="S:")
+        labelE = tk.Label(self, text="E:")
+        labelW = tk.Label(self, text="W:")
+
+        labelN.grid(row=1, sticky="E")
+        labelS.grid(row=2, sticky="E")
+        labelE.grid(row=3, sticky="E")
+        labelW.grid(row=4, sticky="E")
+
+        eN = Entry(self)
+        eS = Entry(self)
+        eE = Entry(self)
+        eW = Entry(self)
+
+        eN.grid(row=1, column=1)
+        eS.grid(row=2, column=1)
+        eE.grid(row=3, column=1)
+        eW.grid(row=4, column=1)
+
+        submitBTN = Button(self, text="Submit")
+        exitBTN = Button(self, text="Exit", command=lambda: controller.show_frame(PageOne))
+        submitBTN.grid(row=5)
+        exitBTN.grid(row=5, column=1)
 
 
 app = Main()
