@@ -5,8 +5,9 @@ import datetime
 import requests
 from requests.auth import HTTPBasicAuth
 
-class apiConnect:
-    def apiDownload(self):
+
+class ApiConnect:
+    def api_download(self):
         apikey = '7f2d08550c1c4d03a0f133827f1e0190'
 
         c = 0
@@ -30,8 +31,8 @@ class apiConnect:
         y5 = 44.798464385462914
 
         geojson_geometry = {
-        "type": "Polygon",
-        "coordinates": [
+            "type": "Polygon",
+            "coordinates": [
           [
             [
               x1,
@@ -58,9 +59,9 @@ class apiConnect:
       }
 
         geometry_filter = {
-        "type": "GeometryFilter",
-        "field_name": "geometry",
-        "config": geojson_geometry
+            "type": "GeometryFilter",
+            "field_name": "geometry",
+            "config": geojson_geometry
     }
         date_range_filter = {
             "type": "DateRangeFilter",
@@ -93,7 +94,6 @@ class apiConnect:
 
         image_ids = [feature['id'] for feature in search_result.json()['features']]
 
-
         id0 = image_ids[0]
         id0_url = 'https://api.planet.com/data/v1/item-types/{}/items/{}/assets'.format(item_type, id0)
 
@@ -118,7 +118,7 @@ class apiConnect:
               self_link,
               auth=HTTPBasicAuth(apikey, '')
           )
-        if (activation_status_result.json()["status"] != 'active'):
+        if activation_status_result.json()["status"] != 'active':
             while activation_status_result.json()["status"] != 'active':
                 activation_status_result = \
                     requests.get(
@@ -129,16 +129,17 @@ class apiConnect:
 
         download_link = activation_status_result.json()["location"]
         print("activated")
-        picture = requests.get(download_link, allow_redirects = True)
-        open('{}-{}-{}.tif'.format(vreme.year,vreme.month,vreme.day-1), 'wb').write(picture.content)
+        picture = requests.get(download_link, allow_redirects=True)
+        open('{}-{}-{}.tif'.format(vreme.year, vreme.month, vreme.day-1), 'wb').write(picture.content)
 
-    def apiWeather(x1,y1,x2,y2):
+    def api_weather(self, x1, y1, x2, y2):
         apikey = 'cb67ecffe5d436dee22c58f613ea7332'
         c = 0
         x = (x1 + x2) / 2
         y = (y1 + y2) / 2
 
-        apiLink = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=current,minutely,hourly,alerts&appid={}'.format(y,x,apikey)
+        apiLink = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=current,minutely,hourly,' \
+                  'alerts&appid={}'.format(y, x, apikey)
 
 
         weatherStatus = \
@@ -146,11 +147,11 @@ class apiConnect:
                 apiLink
             )
         #print(weatherStatus.json())
-      #  h = 0
-      #  for x in weatherStatus.json()['daily']:
-      #      if(x['weather'][0]['main'] == 'Clouds'):
-       #         c = c+1
-       #     h = h + 1
-       # print(h)
-       # print(c)
+        #  h = 0
+        #  for x in weatherStatus.json()['daily']:
+        #      if(x['weather'][0]['main'] == 'Clouds'):
+        #         c = c+1
+        #     h = h + 1
+        # print(h)
+        # print(c)
 
