@@ -49,28 +49,32 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
 
 
 class CoordinatesManager:
-    def save_new_coordinates(self, x_upper_left, y_upper_left, x_lower_right, y_lower_right):  # Upisuje nove koordinate u text fajl
+    def save_new_coordinates(self, x_upper_left, y_upper_left, x_lower_right,
+                             y_lower_right):  # Upisuje nove koordinate u text fajl
         f = open("saves/local_coordinates.txt", "w")
         coordinates = str(x_upper_left) + " " + str(y_upper_left) + " " + str(x_lower_right) + " " + str(y_lower_right)
         f.write(coordinates)
         f.close()
 
-    def get_current_coordinates(self): # Cita upisane koordinate iz text fajla
+    def get_current_coordinates(self):  # Cita upisane koordinate iz text fajla
         f = open("saves/local_coordinates.txt", "r")
-        user_coordinates = f.read()
+        user_coordinates = str(f.read())
         f.close()
         return user_coordinates
 
 
-def save_alert_level(alert_level_for_write): # Upisuje trenutni alert level u text fajl
+def save_alert_level(alert_level_for_write):  # Upisuje trenutni alert level u text fajl
     f = open("saves/previous_comparison.txt", "w")
     f.write(str(alert_level_for_write))
     f.close()
 
 
-def get_saved_alert_level(): # Cita prethodni alert level iz text fajla
+def get_saved_alert_level():  # Cita prethodni alert level iz text fajla
     f = open("saves/previous_comparison.txt", "w")
-    previous_alert_level = f.read()
+    try:
+        previous_alert_level = f.read()
+    except:
+        previous_alert_level = 0
     f.close()
     return previous_alert_level
 
@@ -79,7 +83,8 @@ def get_saved_alert_level(): # Cita prethodni alert level iz text fajla
 alert_level = check_for_flood()
 print(switcher_func(alert_level))
 
-save_alert_level(0) # Ovo naravno skloniti kada api proradi
+save_alert_level(0)  # Ovo naravno skloniti kada api proradi
 
-# save_new_coordinates(5, 3, 5, 7)
+CoordinatesManager.save_new_coordinates(None, 19.353790283203125, 44.19469759091441, 19.378938674926758,
+                                        44.17654094649196)
 # print(get_current_coordinates())
