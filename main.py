@@ -2,7 +2,8 @@ import numpy as np
 import cv2
 import riverDetect
 import pixelCounter
-
+import graphical_user_interface
+import time
 
 def switcher_func(arg):  # Switch funkcija za check_for_flood()
     switcher = {
@@ -80,11 +81,14 @@ def get_saved_alert_level():  # Cita prethodni alert level iz text fajla
 
 
 # START
-alert_level = check_for_flood()
-print(switcher_func(alert_level))
+t = time.localtime()
+current_time = time.strftime("%H:%M:%S", t)
+print(current_time)
+if current_time == "15:00:00":
+    alert_level = check_for_flood()
+    print(switcher_func(alert_level))
 
 save_alert_level(0)  # Ovo naravno skloniti kada api proradi
 
-CoordinatesManager.save_new_coordinates(None, 19.353790283203125, 44.19469759091441, 19.378938674926758,
-                                        44.17654094649196)
+# CoordinatesManager.save_new_coordinates(None, 19.353790283203125, 44.19469759091441, 19.378938674926758, 44.17654094649196)
 # print(get_current_coordinates())
