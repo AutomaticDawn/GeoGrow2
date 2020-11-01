@@ -39,9 +39,47 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
     else:
         alert_level_counter = 0
 
+    comparison_level = get_saved_alert_level()
+    if alert_level_counter > -3 & alert_level_counter < 3:
+        alert_level_counter += comparison_level
+    # save_alert_level(alert_level_counter)
+    # Ovo odkomentarisati kada budemo imali api
+
     return alert_level_counter
 
 
-# Ovde krece program
+class CoordinatesManager:
+    def save_new_coordinates(self, x_upper_left, y_upper_left, x_lower_right, y_lower_right):  # Upisuje nove koordinate u text fajl
+        f = open("saves/local_coordinates.txt", "w")
+        coordinates = str(x_upper_left) + " " + str(y_upper_left) + " " + str(x_lower_right) + " " + str(y_lower_right)
+        f.write(coordinates)
+        f.close()
+
+    def get_current_coordinates(self): # Cita upisane koordinate iz text fajla
+        f = open("saves/local_coordinates.txt", "r")
+        user_coordinates = f.read()
+        f.close()
+        return user_coordinates
+
+
+def save_alert_level(alert_level_for_write): # Upisuje trenutni alert level u text fajl
+    f = open("saves/previous_comparison.txt", "w")
+    f.write(str(alert_level_for_write))
+    f.close()
+
+
+def get_saved_alert_level(): # Cita prethodni alert level iz text fajla
+    f = open("saves/previous_comparison.txt", "w")
+    previous_alert_level = f.read()
+    f.close()
+    return previous_alert_level
+
+
+# START
 alert_level = check_for_flood()
 print(switcher_func(alert_level))
+
+save_alert_level(0) # Ovo naravno skloniti kada api proradi
+
+# save_new_coordinates(5, 3, 5, 7)
+# print(get_current_coordinates())
