@@ -134,17 +134,23 @@ class apiConnect:
 
     def apiWeather(x1,y1,x2,y2):
         apikey = 'cb67ecffe5d436dee22c58f613ea7332'
-
+        c = 0
         x = (x1 + x2) / 2
         y = (y1 + y2) / 2
 
-        apiLink = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&appid={}'.format(y,x,apikey)
+        apiLink = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=current,minutely,hourly,alerts&appid={}'.format(y,x,apikey)
 
 
         weatherStatus = \
             requests.get(
                 apiLink
             )
-        print(weatherStatus.json())
+        #print(weatherStatus.json())
+      #  h = 0
+      #  for x in weatherStatus.json()['daily']:
+      #      if(x['weather'][0]['main'] == 'Clouds'):
+       #         c = c+1
+       #     h = h + 1
+       # print(h)
+       # print(c)
 
-apiConnect.apiWeather(20.470619201660156,44.798464385462914,20.456714630126953,44.806685916025835)
