@@ -1,64 +1,62 @@
 import tkinter as tk
-from tkinter import *
 
-LARGE_FONT = ("Verdana", 12)
+LARGE_FONT=("Verdana", 12)
 
 
-class GUI_Initalization(tk.Tk):
+class Main(tk.Tk):
+
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
 
-        container.pack(side="top", fill="both", expand=True)
+        container.pack(side="top", fill="both", expand = True)
 
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
 
-        frame = LoginPage(container, self)
+        frame = StartPage(container, self)
+        frame_ = PageOne(container, self)
 
-        self.frames[LoginPage] = frame
+        self.frames[StartPage] = frame
+        self.frames[PageOne] = frame_
 
         frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame(LoginPage)
+        frame_.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
 
     def show_frame(self, cont):
-
         frame = self.frames[cont]
         frame.tkraise()
 
+def qf(param):
+    print(param)
 
-class LoginPage(tk.Frame):
+class StartPage(tk.Frame):
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Login", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
 
-        label = tk.Label(self, text="LogIn Page", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
-        uname = tk.Label(self, text="Username")
-        password = tk.Label(self, text="Password")
-        entry1 = Entry(self)
-        entry2 = Entry(self, show="*")
-
-        uname.pack(side=LEFT)
-        password.pack(side=LEFT)
-        entry1.pack()
-        entry2.pack()
-
-        button1 = tk.Button(self, text="Login", command=lambda: controller.show_frame(PageOne))
+        #command within button cant throw args to funcs. Use lambda to throw those args to the func instead
+        button1 = tk.Button(self, text="Login",command=lambda: controller.show_frame(PageOne))
         button1.pack()
-
 
 class PageOne(tk.Frame):
-     def __init__(self, parent, controller):
+
+    def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
         label = tk.Label(self, text="Page One", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
+        label.pack(pady=10,padx=10)
 
-        button1 = tk.Button(self, text="Exit", command=lambda: controller.show_frame(LoginPage))
+        #command within button cant throw args to funcs. Use lambda to throw those args to the func instead
+        button1 = tk.Button(self, text="Start Page",command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
 
-app = GUI_Initalization()
+app = Main()
 app.mainloop()
+
