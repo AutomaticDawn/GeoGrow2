@@ -27,7 +27,7 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
 
     pixel_difference = pixelCounter.CompareAreas.find_diffrence(None, river_before, river_after)
     pixel_difference = float("{:.2f}".format(pixel_difference))
-    print("River level increase by", pixel_difference, "%")
+
 
     if pixel_difference > 100:
         alert_level_counter = 3
@@ -46,7 +46,12 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
     # save_alert_level(alert_level_counter)
     # Ovo odkomentarisati kada budemo imali api
 
+    print("River level increase by", pixel_difference, "%")
     print(switcher_func(alert_level_counter))
+
+    msg1 = "River level increase by" + str(pixel_difference) + "%"
+    msg2 = str(switcher_func(alert_level_counter))
+
     #return alert_level_counter
 
 

@@ -3,6 +3,7 @@ from tkinter import *
 import main
 
 LARGE_FONT=("Verdana", 12)
+MEDIUM_FONT=("Verdana", 10)
 
 
 class MainGUI(tk.Tk):
@@ -10,6 +11,9 @@ class MainGUI(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
+
+        self.title("GeoGrow")
+        self.geometry('250x250')
 
         container.pack(side="top", fill="both", expand = True)
 
@@ -46,7 +50,7 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         label = tk.Label(self, text="Login", font=LARGE_FONT)
-        label.grid(pady=10, padx=20, row=0)
+        label.grid(pady=10, padx=100, row=0)
 
         userLabel = tk.Label(self, text="Username:")
         userLabel.grid(row=1)
@@ -66,8 +70,8 @@ class StartPage(tk.Frame):
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Page One", font=LARGE_FONT)
-        label.grid(pady=10, padx=10, row=0)
+        label = tk.Label(self, text="GeoGrow", font=LARGE_FONT)
+        label.grid(pady=10, padx=85, row=0)
 
         button1 = tk.Button(self, text="Enter Coordinates", command=lambda: controller.show_frame(Coordinates))
         button1.grid(pady=5, padx=10, row=1)
@@ -75,11 +79,17 @@ class PageOne(tk.Frame):
         button2 = tk.Button(self, text="Check", command=lambda: main.check_for_flood())
         button2.grid(pady=5, padx=10, row=2)
 
+        label2 = tk.Label(self, text="Not Checked", font=MEDIUM_FONT)
+        label2.grid(pady=10, padx=10, row=3)
+
+        button1 = tk.Button(self, text="Log Out", command=lambda: controller.show_frame(StartPage))
+        button1.grid(pady=10, padx=10, row=4)
+
 class Coordinates(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Insert Coordinates", font=LARGE_FONT)
-        label.grid(row=0, columnspan=2)
+        label.grid(pady=10, padx=30, row=0, columnspan=2)
         labelN = tk.Label(self, text="N:")
         labelS = tk.Label(self, text="S:")
         labelE = tk.Label(self, text="E:")
@@ -102,8 +112,8 @@ class Coordinates(tk.Frame):
 
         submitBTN = Button(self, text="Submit", command=lambda: main.CoordinatesManager.save_new_coordinates(None, eW.get(), eN.get(), eE.get(), eS.get()))
         exitBTN = Button(self, text="Exit", command=lambda: controller.show_frame(PageOne))
-        submitBTN.grid(row=5)
-        exitBTN.grid(row=5, column=1)
+        submitBTN.grid(pady=10, padx=10, row=5, column=1)
+        exitBTN.grid(pady=5, padx=10, row=6, column=1)
 
 
 app = MainGUI()
