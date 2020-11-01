@@ -79,17 +79,24 @@ class PageOne(tk.Frame):
         button2 = tk.Button(self, text="Check", command=lambda: main.check_for_flood())
         button2.grid(pady=5, padx=10, row=2)
 
+        global label2
         label2 = tk.Label(self, text="Not Checked", font=MEDIUM_FONT)
         label2.grid(pady=10, padx=10, row=3)
 
         button1 = tk.Button(self, text="Log Out", command=lambda: controller.show_frame(StartPage))
         button1.grid(pady=10, padx=10, row=4)
 
+    def update(msg):
+        label2.config(text=msg)
+
+
 class Coordinates(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
         label = tk.Label(self, text="Insert Coordinates", font=LARGE_FONT)
-        label.grid(pady=10, padx=30, row=0, columnspan=2)
+        label.grid(pady=10, padx=0, row=0, column=0, columnspan=2)
+
         labelN = tk.Label(self, text="N:")
         labelS = tk.Label(self, text="S:")
         labelE = tk.Label(self, text="E:")
@@ -105,16 +112,22 @@ class Coordinates(tk.Frame):
         eE = Entry(self)
         eW = Entry(self)
 
-        eN.grid(row=1, column=1)
-        eS.grid(row=2, column=1)
-        eE.grid(row=3, column=1)
-        eW.grid(row=4, column=1)
+        eN.grid(pady=0, padx=10, row=1, column=1)
+        eS.grid(pady=0, padx=10, row=2, column=1)
+        eE.grid(pady=0, padx=10, row=3, column=1)
+        eW.grid(pady=0, padx=10, row=4, column=1)
 
         submitBTN = Button(self, text="Submit", command=lambda: main.CoordinatesManager.save_new_coordinates(None, eW.get(), eN.get(), eE.get(), eS.get()))
         exitBTN = Button(self, text="Exit", command=lambda: controller.show_frame(PageOne))
         submitBTN.grid(pady=10, padx=10, row=5, column=1)
         exitBTN.grid(pady=5, padx=10, row=6, column=1)
 
+        global labelError
+        labelError = tk.Label(self, text="Enter Values               ", font=MEDIUM_FONT)
+        labelError.grid(pady=5, padx=10, row=7, columnspan=2)
+
+    def updateErrorText(self, errormsg):
+        labelError.config(text=errormsg)
 
 app = MainGUI()
 app.mainloop()

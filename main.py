@@ -46,11 +46,13 @@ def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za po
     # save_alert_level(alert_level_counter)
     # Ovo odkomentarisati kada budemo imali api
 
-    print("River level increase by", pixel_difference, "%")
-    print(switcher_func(alert_level_counter))
+    #print("River level increase by ", pixel_difference, "%")
+    #print(switcher_func(alert_level_counter))
 
-    msg1 = "River level increase by" + str(pixel_difference) + "%"
+    msg1 = "River level increase by " + str(pixel_difference) + "%"
     msg2 = str(switcher_func(alert_level_counter))
+
+    graphical_user_interface.PageOne.update(msg1 + "\n" + msg2)
 
     #return alert_level_counter
 
@@ -59,8 +61,12 @@ class CoordinatesManager:
     def save_new_coordinates(self, x_upper_left, y_upper_left, x_lower_right,
                              y_lower_right):  # Upisuje nove koordinate u text fajl
         f = open("saves/local_coordinates.txt", "w")
-        coordinates = str(x_upper_left) + " " + str(y_upper_left) + " " + str(x_lower_right) + " " + str(y_lower_right)
-        f.write(coordinates)
+        if x_upper_left != "" or y_upper_left != "" or x_lower_right != "" or y_lower_right != "":
+            coordinates = str(x_upper_left) + " " + str(y_upper_left) + " " + str(x_lower_right) + " " + str(y_lower_right)
+            f.write(coordinates)
+        else:
+            graphical_user_interface.Coordinates.updateErrorText(None, "Error: Not all fields filled")
+            #print("Error: Not all fields filled")
         f.close()
 
     def get_current_coordinates(self):  # Cita upisane koordinate iz text fajla
