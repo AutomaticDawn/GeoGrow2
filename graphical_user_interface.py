@@ -42,20 +42,20 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         label = tk.Label(self, text="Login", font=LARGE_FONT)
-        label.pack(pady=10, padx=20)
+        label.grid(pady=10, padx=20, row=0)
 
         user = tk.Entry(self, width="24")
         user.insert(END, "Username:")
-        user.pack(pady=10, padx=20)
+        user.grid(pady=10, padx=20, row=1)
 
         passwLabel = tk.Label(self, text="Password:")
-        passwLabel.pack()
+        passwLabel.grid(row=2)
 
         passw = tk.Entry(self, show="*", width ="24")
-        passw.pack(padx=20)
+        passw.grid(padx=20, row=3)
 
         button1 = tk.Button(self, text="Login", command=lambda: controller.show_frame(PageOne))
-        button1.pack(pady=5, padx=20)
+        button1.grid(pady=5, padx=20, row=4)
 
 class PageOne(tk.Frame):
 
