@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import *
 
 LARGE_FONT=("Verdana", 12)
 
@@ -31,32 +32,41 @@ class Main(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-def qf(param):
-    print(param)
+#def qf(param):
+    #print(param)
 
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        #Login page
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Login", font=LARGE_FONT)
-        label.pack(pady=10,padx=10)
 
-        #command within button cant throw args to funcs. Use lambda to throw those args to the func instead
-        button1 = tk.Button(self, text="Login",command=lambda: controller.show_frame(PageOne))
-        button1.pack()
+        label = tk.Label(self, text="Login", font=LARGE_FONT)
+        label.pack(pady=10, padx=20)
+
+        user = tk.Entry(self, width="24")
+        user.insert(END, "Username:")
+        user.pack(pady=10, padx=20)
+
+        passwLabel = tk.Label(self, text="Password:")
+        passwLabel.pack()
+
+        passw = tk.Entry(self, show="*", width ="24")
+        passw.pack(padx=20)
+
+        button1 = tk.Button(self, text="Login", command=lambda: controller.show_frame(PageOne))
+        button1.pack(pady=5, padx=20)
 
 class PageOne(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page One", font=LARGE_FONT)
-        label.pack(pady=10,padx=10)
+        label.pack(pady=10, padx=10)
 
-        #command within button cant throw args to funcs. Use lambda to throw those args to the func instead
         button1 = tk.Button(self, text="Start Page",command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
 
 app = Main()
 app.mainloop()
-
