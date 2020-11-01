@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+import main
 
 LARGE_FONT=("Verdana", 12)
 
@@ -67,10 +68,13 @@ class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page One", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
+        label.grid(pady=10, padx=10, row=0)
 
         button1 = tk.Button(self, text="Enter Coordinates", command=lambda: controller.show_frame(Coordinates))
-        button1.pack()
+        button1.grid(pady=5, padx=10, row=1)
+
+        button2 = tk.Button(self, text="sample", command=main.check_for_flood())
+        button2.grid(pady=5, padx=10, row=2)
 
 class Coordinates(tk.Frame):
     def __init__(self, parent, controller):
