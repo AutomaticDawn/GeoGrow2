@@ -5,7 +5,7 @@ import main
 LARGE_FONT=("Verdana", 12)
 
 
-class Main(tk.Tk):
+class MainGUI(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -106,5 +106,5 @@ class Coordinates(tk.Frame):
         exitBTN.grid(row=5, column=1)
 
 
-app = Main()
+app = MainGUI()
 app.mainloop()
