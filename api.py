@@ -131,3 +131,20 @@ class apiConnect:
         print("activated")
         picture = requests.get(download_link, allow_redirects = True)
         open('{}-{}-{}.tif'.format(vreme.year,vreme.month,vreme.day-1), 'wb').write(picture.content)
+
+    def apiWeather(x1,y1,x2,y2):
+        apikey = 'cb67ecffe5d436dee22c58f613ea7332'
+
+        x = (x1 + x2) / 2
+        y = (y1 + y2) / 2
+
+        apiLink = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&appid={}'.format(y,x,apikey)
+
+
+        weatherStatus = \
+            requests.get(
+                apiLink
+            )
+        print(weatherStatus.json())
+
+apiConnect.apiWeather(20.470619201660156,44.798464385462914,20.456714630126953,44.806685916025835)
