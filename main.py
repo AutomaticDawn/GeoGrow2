@@ -21,8 +21,8 @@ def display_message_to_user(message):  # Ovde cemo ubaciti stvari koje ce da fun
 
 
 def check_for_flood():  # Provera izmedju beforeflood.png i afterflood.png za poplavom
-    river_before = riverDetect.DetectRivers.find_rivermask(None, "beforeflood.png")
-    river_after = riverDetect.DetectRivers.find_rivermask(None, "afterflood.png")
+    river_before = riverDetect.DetectRivers.find_rivermask(None, "pictures/satellite/beforeflood.png")
+    river_after = riverDetect.DetectRivers.find_rivermask(None, "pictures/satellite/afterflood.png")
 
     pixel_difference = pixelCounter.CompareAreas.find_diffrence(None, river_before, river_after)
     pixel_difference = float("{:.2f}".format(pixel_difference))
